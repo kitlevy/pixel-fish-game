@@ -2,13 +2,13 @@ import pygame
 import pygame.freetype
 import os, sys, time
 
-from states import Title, FishSim
+from states.fish import ScreenOne
 
 class Game():
     def __init__(self):
         pygame.init()
-        self.GAME_W, self.GAME_H = 600, 300
-        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = 960, 540
+        self.GAME_W, self.GAME_H = 256, 256
+        self.SCREEN_WIDTH, self.SCREEN_HEIGHT = 256, 256
         self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         self.running, self.playing = True, True
@@ -25,7 +25,7 @@ class Game():
             self.get_events()
             self.update()
             self.render()
-            clock.tick(60)
+            clock.tick(5)
 
     def get_events(self):
         for event in pygame.event.get():
@@ -57,12 +57,12 @@ class Game():
     def load_assets(self):
         self.assets_dir = os.path.join("assets")
         self.font_dir = os.path.join(self.assets_dir, "font")
-        self.font = pygame.freetype.Font("assets/PixelOperator-Bold.ttf",16)
-        #self.font = pygame.freetype.Font("assets/PressStart.ttf",12)
+        self.font = pygame.freetype.Font("assets/fonts/PixelOperator-Bold.ttf",16)
+        self.bg = pygame.image.load("assets/background1A.png")
 
 
     def load_states(self):
-            Title(self).enter_state()
+            ScreenOne(self).enter_state()
 
     def change_state(self, new_state):
         if self.state_stack:

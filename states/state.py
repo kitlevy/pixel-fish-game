@@ -5,6 +5,7 @@ class State():
 
     def update(self, delta_time):
         pass
+
     def render(self, surface):
         pass
 
